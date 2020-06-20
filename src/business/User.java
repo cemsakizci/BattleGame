@@ -85,7 +85,7 @@ public class User {
 		for(IVehicle plane:planeList){
 			int min = plane.getMinPoint();
 			int max = plane.getMaxPoint();
-			int score = rand.nextInt(max+1) + min;
+			int score = rand.nextInt(max-min+1) + min;
 			sum += score;
 		}
 		return sum;
