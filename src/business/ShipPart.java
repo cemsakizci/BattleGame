@@ -33,5 +33,9 @@ public abstract class ShipPart implements IAddable{
 		return parts;
 	}
 	
+	public EngineType getEngineType() {
+		return null;
+	}
+	
 	public abstract AddableType getPartType();
 }

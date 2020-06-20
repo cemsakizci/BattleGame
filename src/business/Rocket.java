@@ -40,4 +40,8 @@ public class Rocket implements IPlane, IShip{
 	public AddableType getPartType() {
 		return AddableType.ROCKET;
 	}
+	
+	public EngineType getEngineType() {
+		return this.vehicle.getEngineType();
+	}
 }

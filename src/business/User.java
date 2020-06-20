@@ -16,7 +16,7 @@ public class User {
 		rand = new Random();
 	}
 	
-	public boolean addShip(AbstractVehicleFactory factory, VehicleType vehicleType){
+	public boolean addShip(AbstractFactory factory, VehicleType vehicleType){
 		if(shipList.size() == sameVehicleLimit){
 			return false;
 		}
@@ -33,7 +33,7 @@ public class User {
 		return true;
 	}
 	
-	public boolean addPlane(AbstractVehicleFactory factory, VehicleType vehicleType, EngineType engineType){
+	public boolean addPlane(AbstractFactory factory, VehicleType vehicleType, EngineType engineType){
 		if(planeList.size() == sameVehicleLimit){
 			return false;
 		}
@@ -50,7 +50,7 @@ public class User {
 		return true;
 	}
 	
-	public boolean addShipAddable(AbstractVehicleFactory factory, AddableType type, int index){
+	public boolean addShipAddable(AbstractFactory factory, AddableType type, int index){
 		IAddable updatedShip = factory.createAddable(shipList.get(index), type);
 		if(updatedShip != null){
 			shipList.set(index, updatedShip);
@@ -59,7 +59,7 @@ public class User {
 		return false;
 	}
 	
-	public boolean addPlaneAddable(AbstractVehicleFactory factory, AddableType type, int index){
+	public boolean addPlaneAddable(AbstractFactory factory, AddableType type, int index){
 		IAddable updatedPlane = factory.createAddable(planeList.get(index), type);
 		if(updatedPlane != null){
 			planeList.set(index, updatedPlane);

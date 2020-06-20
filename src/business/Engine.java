@@ -16,4 +16,6 @@ public abstract class Engine {
 	public int getMaxPoint() {
 		return this.maxPoint;
 	}
+	
+	public abstract EngineType getEngineType();
 }

@@ -7,4 +7,5 @@ public interface IVehicle {
 	public int getMaxPoint();
 	public VehicleType getType();
 	public ArrayList<AddableType> getParts();
+	public EngineType getEngineType();
 }

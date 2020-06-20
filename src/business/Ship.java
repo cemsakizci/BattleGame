@@ -26,4 +26,8 @@ public abstract class Ship implements IShip{
 	public IVehicle getBase() {
 		return null;
 	}
+	
+	public EngineType getEngineType() {
+		return null;
+	}
 }

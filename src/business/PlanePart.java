@@ -33,5 +33,10 @@ public abstract class PlanePart implements IAddable{
 		return parts;
 	}
 	
+	public EngineType getEngineType() {
+		return this.plane.getEngineType();
+	}
+	
 	public abstract AddableType getPartType();
+	
 }

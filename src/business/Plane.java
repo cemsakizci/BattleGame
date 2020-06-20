@@ -28,5 +28,8 @@ public abstract class Plane implements IPlane{
 	public ArrayList<AddableType> getParts() {
 		return new ArrayList<AddableType>();
 	}
-
+	
+	public EngineType getEngineType() {
+		return this.engine.getEngineType();
+	}
 }
