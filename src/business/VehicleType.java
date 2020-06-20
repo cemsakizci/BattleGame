@@ -1,3 +1,5 @@
+package business;
+
 
 public enum VehicleType {
 	FIGHTER, 

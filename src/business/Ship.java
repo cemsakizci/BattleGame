@@ -1,21 +1,20 @@
+package business;
 
-public class Turbojet implements IEngine {
+
+public abstract class Ship implements IShip{
 	private int minPoint;
 	private int maxPoint;
 	
-	public Turbojet() {
-		this.minPoint = 5;
-		this.maxPoint = 7;
+	public Ship(int minPoint, int maxPoint) {
+		this.minPoint = minPoint;
+		this.maxPoint = maxPoint;
 	}
 	
-	@Override
 	public int getMinPoint() {
 		return this.minPoint;
 	}
-
-	@Override
+	
 	public int getMaxPoint() {
 		return this.maxPoint;
 	}
-
 }

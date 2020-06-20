@@ -1,20 +1,19 @@
+package business;
 
-public class Pulsejet implements IEngine {
+
+public abstract class Engine {
 	private int minPoint;
 	private int maxPoint;
-	public Pulsejet() {
-		this.minPoint = 2;
-		this.maxPoint = 4;
+	
+	public Engine(int minPoint, int maxPoint) {
+		this.minPoint = minPoint;
+		this.maxPoint = maxPoint;
 	}
 	
-	@Override
 	public int getMinPoint() {
 		return this.minPoint;
 	}
-
-	@Override
 	public int getMaxPoint() {
 		return this.maxPoint;
 	}
-
 }
