@@ -78,7 +78,7 @@ public class User {
 		for(IVehicle ship:shipList){
 			int min = ship.getMinPoint();
 			int max = ship.getMaxPoint();
-			int score = rand.nextInt(max+1) + min;
+			int score = rand.nextInt(max-min+1) + min;
 			sum += score;
 		}
 		
