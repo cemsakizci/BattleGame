@@ -1,13 +1,20 @@
 package presentation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import business.AddableType;
+import business.EngineType;
+import business.IVehicle;
+import business.User;
+import business.VehicleType;
+
 public class BattleGame {
-	//private User user1;
-	//private User user2;
+	private User user1;
+	private User user2;
 	//private AbstractVehicleFactory vehicleFactory;
 	Scanner in = new Scanner(System.in);
-
 	
 	public BattleGame() {
 	}
@@ -49,18 +56,27 @@ public class BattleGame {
 	}
 	
 	private void runSimulation() {
-		System.out.println("Player 1 Score :");
-		System.out.println("Player 2 Score :");
+		int user1Points = user1.calculateTotalPoints();
+		int user2Points = user1.calculateTotalPoints();
+
+		System.out.println("Player 1 Score :"+String.valueOf(user1Points));
+		System.out.println("Player 2 Score :"+String.valueOf(user2Points));
+		
+		if(user1Points<user2Points) {
+			System.out.println("Player 2 Win!");
+		} else {
+			System.out.println("Player 1 Win!");
+		}
 		
 	}
 
 	private void resetItems() {
+		user1.resetVehicles();
+		user2.resetVehicles();
 		System.out.println("All items has been reset");
 		
 	}
 
-
-	
 	private void printPlayers() {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT AN USER \\\\ ");
@@ -73,21 +89,20 @@ public class BattleGame {
 		switch(choice) {
 		  case "1":
 			  System.out.println("1.user");
-			  printPlayerOperations("User1");
+			  printPlayerOperations(user1);
 			  break;
 		  case "2":
 			  System.out.println("2.user");
-			  printPlayerOperations("User2");
+			  printPlayerOperations(user2);
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1 or 2.");
 		}
 		
-
 	}
 	
 	//bu user objesi olacak
-	private void printPlayerOperations(String user) {
+	private void printPlayerOperations(User user) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT OPERATION \\\\ ");
 		System.out.println(" 1. Create Vehicle ");
@@ -98,11 +113,9 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  System.out.println(user + " Create Vehicle");
 			  printVehicles(user);
 			  break;
 		  case "2":
-			  System.out.println(user + " Add a Part");
 			  addAPart(user);
 			  break;
 		  default:
@@ -112,7 +125,7 @@ public class BattleGame {
 	}
 	
 	//bu user objesi olacak
-	private void printVehicles(String user) {
+	private void printVehicles(User user) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT VEHICLE TYPE \\\\ ");
 		System.out.println(" 1. Create Plane ");
@@ -128,7 +141,7 @@ public class BattleGame {
 			  break;
 		  case "2":
 			  System.out.println(user + " create ship");
-			  printPlanes(user);
+			  printShips(user);
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1 or 2.");
@@ -137,7 +150,7 @@ public class BattleGame {
 	}
 	
 	//bu user objesi olacak
-	private void printPlanes(String user) {
+	private void printPlanes(User user) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT PLANE TYPE \\\\ ");
 		System.out.println(" 1. Fighter ");
@@ -149,15 +162,13 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  //TODO USER1 is not string it is object
-			  selectPlaneEngine(user,"Fighter");
+			  selectPlaneEngine(user,VehicleType.FIGHTER);
 			  break;
 		  case "2":
-			  //TODO USER1 is not string it is object
-			  selectPlaneEngine(user,"Bomber");
+			  selectPlaneEngine(user,VehicleType.BOMBER);
 			  break;
 		  case "3":
-			  selectPlaneEngine(user,"Multirole");
+			  selectPlaneEngine(user,VehicleType.MULTIROLE);
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2 or 3.");
@@ -167,7 +178,7 @@ public class BattleGame {
 
 	
 	//bu user objesi olacak
-	private void selectPlaneEngine(String user, String plane) {
+	private void selectPlaneEngine(User user, VehicleType vehicleType) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT ENGINE TYPE \\\\ ");
 		System.out.println(" 1. Pulsejet ");
@@ -178,21 +189,22 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  //TODO: Set the engine type of object plane
-			  System.out.println(user+ ": Create Vehicle: "+ plane+ " engine: pulsejet");
+			  user1.addPlane(factory, vehicleType, EngineType.PULSEJET);
+			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Pulsejet");
 			  break;
 		  case "2":
-			  //TODO: Set the engine type of object plane
-			  System.out.println(user+ ": Create Vehicle: "+ plane+ " engine: turbojet");
+			  user1.addPlane(factory, vehicleType, EngineType.TURBOJET);
+			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Turbojet");
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1 or 2.");
 		}
+		
 
 	}
 
 	//bu user objesi olacak
-	private void printShips(String user) {
+	private void printShips(User user) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT SHIP TYPE \\\\ ");
 		System.out.println(" 1. Cruiser ");
@@ -204,15 +216,16 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  //TODO USER1 is not string it is object
-			  System.out.println(user+ ": Create Vehicle: Cruiser");
+			  user.addShip(factory, VehicleType.CRUISER);
+			  System.out.println("Ship Created: Cruiser");
 			  break;
 		  case "2":
-			  //TODO USER1 is not string it is object
-			  System.out.println(user+ ": Create Vehicle: Destroyer");
+			  user.addShip(factory, VehicleType.DESTROYER);
+			  System.out.println("Ship Created: Destroyer");
 			  break;
 		  case "3":
-			  System.out.println(user+ ": Create Vehicle: Frigate");
+			  user.addShip(factory, VehicleType.FRIGATE);
+			  System.out.println("Ship Created: Frigate");
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2 or 3.");
@@ -220,57 +233,80 @@ public class BattleGame {
 
 	}
 	
-	
-	//bu user objesi olacak
-	private void addAPart(String user) {
+
+	private void addAPart(User user) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
-		System.out.println(" 1. x1 ");
-		System.out.println(" 2. x2");
+		List<IVehicle> vehicles = new  ArrayList<IVehicle>();
+		for(IVehicle vehicle:user.getPlaneList()) {
+			vehicles.add(vehicle);
+		}
+		
+		for(IVehicle vehicle:user.getShipList()) {
+			vehicles.add(vehicle);
+		}
+		
+		for(int i=0;i<vehicles.size();i++) {
+			IVehicle oneVehicle = vehicles.get(i);
+			System.out.println(String.valueOf(i)+". "+oneVehicle.getType().toString() +" "+ getAddablePartsString(oneVehicle));
+		}
 		
 		String choice = in.nextLine();
-		//find corresponding vehicle type
-
-		String vehicleType = "plane";
-
 		
-		if(vehicleType == "plane") {
-			//Objeyi verecek
-			planeAddableParts("x1");
-		} else if (vehicleType == "plane") {
-			//Objeyi verecek
-			shipAddableParts("x2");
+		//Check if specific vehicle index found
+		IVehicle selectedVehicle = null;
+		try {
+			selectedVehicle = vehicles.get(Integer.valueOf(choice));
+		}catch(Exception e) {
+			System.out.println("Wrong input!");
+		}
+
+		//PLANE OR SHIP CHECK
+		int intChoice = Integer.valueOf(choice);
+		int planeSize = user.getPlaneList().size();
+		if(intChoice<planeSize) {
+			planeAddableParts(user, intChoice);
 		} else {
-			System.out.println("Wrong vehicle type!");
+			shipAddableParts(user, intChoice-user.getPlaneList().size());
 		}
 	}
 	
-
-	private void planeAddableParts(String obje) {
+	private String getAddablePartsString(IVehicle vehicle) {
+		String result = "(";
+		for(AddableType addable: vehicle.getParts()) {
+			result += addable.toString();
+		}
+		result += ")";
+		return result;
+	}
+	
+	private void planeAddableParts(User user, int index) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT PLANE ADDABLE PART \\\\ ");
 		System.out.println(" 1. Rocket ");
 		System.out.println(" 2. Missile");
 		System.out.println(" 3. Machine Gun");
-		System.out.println(" 3. Bomb");
+		System.out.println(" 4. Bomb");
 		
 		//Get input
 		String choice = in.nextLine();
 		
 		switch(choice) {
 		  case "1":
-			  //TODO USER1 is not string it is object
-			  System.out.println(obje+ ": Add part : Rocket");
+			  user.addPlaneAddable(factory, AddableType.ROCKET, index);
+			  System.out.println("Part Added : Rocket");
 			  break;
 		  case "2":
-			  //TODO USER1 is not string it is object
-			  System.out.println(obje+ ": Add part : Missile");
+			  user.addPlaneAddable(factory, AddableType.MISSILE, index);
+			  System.out.println("Part Added : Missile");
 			  break;
 		  case "3":
-			  System.out.println(obje+ ": Add part : Machine Gun");
+			  user.addPlaneAddable(factory, AddableType.MACHINEGUN, index);
+			  System.out.println("Part Added : Machine Gun");
 			  break;
 		  case "4":
-			  System.out.println(obje+ ": Add part : Bomb");
+			  user.addPlaneAddable(factory, AddableType.BOMB, index);
+			  System.out.println("Part Added : Bomb");
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2,3 or 4.");
@@ -279,7 +315,7 @@ public class BattleGame {
 	}
 
 	
-	private void shipAddableParts(String obje) {
+	private void shipAddableParts(User user, int index) {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT SHIP ADDABLE PART \\\\ ");
 		System.out.println(" 1. Rocket ");
@@ -291,15 +327,16 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  //TODO USER1 is not string it is object
-			  System.out.println(obje+ ": Add part : Rocket");
+			  user.addShipAddable(factory, AddableType.ROCKET, index);
+			  System.out.println("Part Added : Rocket");
 			  break;
 		  case "2":
-			  //TODO USER1 is not string it is object
-			  System.out.println(obje+ ": Add part : Torpedo");
+			  user.addShipAddable(factory, AddableType.TORPEDO, index);
+			  System.out.println("Part Added : Torpedo");
 			  break;
 		  case "3":
-			  System.out.println(obje+ ": Add part : Cannon");
+			  user.addShipAddable(factory, AddableType.CANNON, index);
+			  System.out.println("Part Added : Cannon");
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2,3 or 4.");
