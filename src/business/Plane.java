@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 
 public abstract class Plane implements IPlane{
 	private int minPoint;
@@ -22,6 +23,10 @@ public abstract class Plane implements IPlane{
 	
 	public Engine getEngine() {
 		return this.engine;
+	}
+	
+	public ArrayList<AddableType> getParts() {
+		return new ArrayList<AddableType>();
 	}
 
 }

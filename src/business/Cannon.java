@@ -7,4 +7,7 @@ public class Cannon extends ShipPart{
 		super(3, 7, ship);
 	}
 	
+	public AddableType getPartType() {
+		return AddableType.CANNON;
+	}
 }
