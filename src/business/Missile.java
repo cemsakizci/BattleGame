@@ -3,7 +3,7 @@ package business;
 
 public class Missile extends PlanePart {
 
-	public Missile (IPlane plane) {
+	public Missile (IVehicle plane) {
 		super(3, 6, plane);
 	}
 	

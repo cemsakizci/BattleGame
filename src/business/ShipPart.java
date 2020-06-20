@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public abstract class ShipPart implements IAddable{
 	private int minPoint;
 	private int maxPoint;
-	private IShip ship;
+	private IVehicle ship;
 	private VehicleType baseVehicleType;
 	
-	public ShipPart (int minPoint, int maxPoint, IShip ship) {
+	public ShipPart (int minPoint, int maxPoint, IVehicle ship) {
 		this.minPoint = minPoint;
 		this.maxPoint = maxPoint;
 		this.ship = ship;

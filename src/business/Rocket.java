@@ -1,36 +1,15 @@
 package business;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-public class Rocket implements IPlane, IShip{
-	private int minPoint;
-	private int maxPoint;
+public class Rocket extends ShipPart implements IVehicle{
+	//private int minPoint;
+	//private int maxPoint;
 	private IVehicle vehicle;
-	private VehicleType baseVehicleType;
+	//private VehicleType baseVehicleType;
 	
 	public Rocket (IVehicle vehicle) {
-		this.minPoint = 2;
-		this.maxPoint = 8;
-		this.vehicle = vehicle;
-		this.baseVehicleType = vehicle.getType();
-	}
-	
-	public int getMinPoint() {
-		return this.vehicle.getMinPoint() + this.minPoint;
-	}
-
-	public int getMaxPoint() {
-		return this.vehicle.getMaxPoint() + this.maxPoint;
-	}
-	
-	public VehicleType getType() {
-		return this.baseVehicleType;
-	}
-	
-	public ArrayList<AddableType> getParts() {
-		ArrayList<AddableType> parts = this.vehicle.getParts();
-		parts.add(this.getPartType());
-		return parts;
+		super(2, 8, vehicle);
 	}
 	
 	public IVehicle getBase() {

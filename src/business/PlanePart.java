@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public abstract class PlanePart implements IAddable{
 	private int minPoint;
 	private int maxPoint;
-	private IPlane plane;
+	private IVehicle plane;
 	private VehicleType baseVehicleType;
 	
-	public PlanePart (int minPoint, int maxPoint, IPlane plane) {
+	public PlanePart (int minPoint, int maxPoint, IVehicle plane) {
 		this.minPoint = minPoint;
 		this.maxPoint = maxPoint;
 		this.plane = plane;

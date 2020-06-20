@@ -3,7 +3,7 @@ package business;
 
 public class Torpedo extends ShipPart{
 
-	public Torpedo(IShip ship) {
+	public Torpedo(IVehicle ship) {
 		super(3, 5, ship);
 	}
 
