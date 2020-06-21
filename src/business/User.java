@@ -98,4 +98,16 @@ public class User {
 	public ArrayList<IPlane> getPlaneList(){
 		return planeList;
 	}
+	
+	public ArrayList<IVehicle> getItems() {
+		ArrayList<IVehicle> items = new ArrayList<IVehicle>();
+		for(IVehicle plane:planeList){
+			items.add(plane);
+		}
+		for(IVehicle ship:shipList){
+			items.add(ship);
+		}
+		
+		return items;
+	}
 }

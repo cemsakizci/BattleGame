@@ -7,6 +7,7 @@ import java.util.Scanner;
 import business.AbstractFactory;
 import business.AddableType;
 import business.EngineType;
+import business.IAddable;
 import business.IPlane;
 import business.IShip;
 import business.IVehicle;
@@ -93,25 +94,51 @@ public class BattleGame {
 	private void printPlayers() {
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT AN USER \\\\ ");
-		System.out.println(" 1. Player 1 ");
+		System.out.println(" 1. Player 1");
 		System.out.println(" 2. Player 2");
+		System.out.println(" 3. Show Items");
 		
 		//Get input
 		String choice = in.nextLine();
 		
 		switch(choice) {
 		  case "1":
-			  System.out.println("1.user");
+			  System.out.println("1.Player");
 			  printPlayerOperations(user1);
 			  break;
 		  case "2":
-			  System.out.println("2.user");
+			  System.out.println("2.Player");
 			  printPlayerOperations(user2);
+			  break;
+		  case "3":
+			  printPlayerItems();
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1 or 2.");
 		}
 		
+	}
+	
+	private void printPlayerItems() {
+		System.out.println(" //// PLAYERS ITEMS\\\\ ");
+		
+		System.out.println("Player 1:");
+		ArrayList<IPlane> player1Items = this.user1.getPlaneList();
+		for(IVehicle vehicle:player1Items){
+			System.out.print(vehicle.getType() + " with " + vehicle.getEngineType() + " ");
+			ArrayList<AddableType> parts = vehicle.getParts();
+			System.out.println(parts);
+		}
+		
+		System.out.println("\nPlayer 2:");
+		ArrayList<IVehicle> player2Items = this.user2.getItems();
+		for(IVehicle vehicle:player2Items){
+			System.out.print(vehicle.getType() + " ");
+			ArrayList<AddableType> parts = vehicle.getParts();
+			System.out.println(parts);
+		}
+		
+		System.out.println();
 	}
 	
 	//bu user objesi olacak
@@ -248,6 +275,10 @@ public class BattleGame {
 	
 
 	private void addAPart(User user) {
+		if (user.getItems().size() == 0) {
+			System.out.println("No Plane/Ship to add a part.");
+			return;
+		}
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
 		List<IVehicle> vehicles = new  ArrayList<IVehicle>();
