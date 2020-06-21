@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 
 public class Main {
 
@@ -7,22 +8,22 @@ public class Main {
 		// TODO Auto-generated method stub
 		IPlane plane = new Fighter(new Pulsejet());
 		
-		
 		IShip ship = new Cruiser();
 		IShip cannonShip = new Cannon(ship);
 		IShip crShip = new Rocket(cannonShip);
 		IShip crtor = new Torpedo(crShip);
 		System.out.println(crtor.getParts());
 		
-		ShipFactory shipFac = new ShipFactory();
+		AbstractFactory<IShip> shipFac = new ShipFactory();
 		IShip newShip = shipFac.createVehicle(VehicleType.DESTROYER, null);
 		System.out.println(newShip.getType());
 		
-		PlaneFactory planeFac = new PlaneFactory();
+		AbstractFactory<IPlane> planeFac = new PlaneFactory();
 		IPlane newPlane = planeFac.createVehicle(VehicleType.FIGHTER, EngineType.PULSEJET);
 		IPlane missilePlane = new Missile(plane);
 		IPlane mrPlane = new Rocket(missilePlane);
-		System.out.println(mrPlane.getParts());
+		System.out.println(mrPlane.getEngineType());
+		
 		
 	}
 

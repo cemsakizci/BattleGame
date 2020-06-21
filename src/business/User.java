@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class User {
-	private ArrayList<IVehicle> planeList;
-	private ArrayList<IVehicle> shipList;
+	private ArrayList<IPlane> planeList;
+	private ArrayList<IShip> shipList;
 	private int sameVehicleLimit = 3; // only 3 ships or planes allowed
 	private int sameTypeLimit = 2; // only 2 same specific type (ex: fighter planes )allowed
 	private Random rand;
 	
 	public User(){
-		planeList = new ArrayList<IVehicle>();
-		shipList = new ArrayList<IVehicle>();
+		planeList = new ArrayList<IPlane>();
+		shipList = new ArrayList<IShip>();
 		rand = new Random();
 	}
 	
-	public boolean addShip(AbstractFactory factory, VehicleType vehicleType){
+	public boolean addShip(AbstractFactory<IShip> factory, VehicleType vehicleType){
 		if(shipList.size() == sameVehicleLimit){
 			return false;
 		}
@@ -28,12 +28,12 @@ public class User {
 				return false;
 			}
 		}
-		IVehicle newShip = factory.createVehicle(vehicleType);
+		IShip newShip = factory.createVehicle(vehicleType, null);
 		shipList.add(newShip);
 		return true;
 	}
 	
-	public boolean addPlane(AbstractFactory factory, VehicleType vehicleType, EngineType engineType){
+	public boolean addPlane(AbstractFactory<IPlane> factory, VehicleType vehicleType, EngineType engineType){
 		if(planeList.size() == sameVehicleLimit){
 			return false;
 		}
@@ -45,7 +45,7 @@ public class User {
 				return false;
 			}
 		}
-		IVehicle newPlane = factory.createVehicle(vehicleType, engineType);
+		IPlane newPlane = factory.createVehicle(vehicleType, engineType);
 		planeList.add(newPlane);
 		return true;
 	}
@@ -91,11 +91,11 @@ public class User {
 		return sum;
 	}
 	
-	public ArrayList<IVehicle> getShipList(){
+	public ArrayList<IShip> getShipList(){
 		return shipList;
 	}
 	
-	public ArrayList<IVehicle> getPlaneList(){
+	public ArrayList<IPlane> getPlaneList(){
 		return planeList;
 	}
 }

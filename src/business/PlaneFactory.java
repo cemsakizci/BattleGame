@@ -1,6 +1,6 @@
 package business;
 
-public class PlaneFactory {
+public class PlaneFactory extends AbstractFactory<IPlane>{
 
 	public IPlane createVehicle(VehicleType vehicleType, EngineType engineType) {
 		Engine engine = null;

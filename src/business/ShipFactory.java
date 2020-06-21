@@ -1,6 +1,6 @@
 package business;
 
-public class ShipFactory {
+public class ShipFactory extends AbstractFactory<IShip>{
 
 	public IShip createVehicle(VehicleType vehicleType, EngineType engineType) {
 		if(vehicleType == VehicleType.CRUISER) {

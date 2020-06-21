@@ -4,19 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import business.AbstractFactory;
 import business.AddableType;
 import business.EngineType;
+import business.IPlane;
+import business.IShip;
 import business.IVehicle;
+import business.PlaneFactory;
+import business.ShipFactory;
 import business.User;
 import business.VehicleType;
 
 public class BattleGame {
 	private User user1;
 	private User user2;
-	//private AbstractVehicleFactory vehicleFactory;
+	private AbstractFactory<IShip> shipFactory;
+	private AbstractFactory<IPlane> planeFactory;
+	
 	Scanner in = new Scanner(System.in);
 	
 	public BattleGame() {
+		this.user1 = new User();
+		this.user2 = new User();
+		this.shipFactory = new ShipFactory();
+		this.planeFactory = new PlaneFactory();
 	}
 	
 	public void printMenu() {
@@ -189,11 +200,11 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  user1.addPlane(factory, vehicleType, EngineType.PULSEJET);
+			  user1.addPlane(this.planeFactory, vehicleType, EngineType.PULSEJET);
 			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Pulsejet");
 			  break;
 		  case "2":
-			  user1.addPlane(factory, vehicleType, EngineType.TURBOJET);
+			  user1.addPlane(this.planeFactory, vehicleType, EngineType.TURBOJET);
 			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Turbojet");
 			  break;
 		  default:
@@ -216,15 +227,15 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  user.addShip(factory, VehicleType.CRUISER);
+			  user.addShip(this.shipFactory, VehicleType.CRUISER);
 			  System.out.println("Ship Created: Cruiser");
 			  break;
 		  case "2":
-			  user.addShip(factory, VehicleType.DESTROYER);
+			  user.addShip(this.shipFactory, VehicleType.DESTROYER);
 			  System.out.println("Ship Created: Destroyer");
 			  break;
 		  case "3":
-			  user.addShip(factory, VehicleType.FRIGATE);
+			  user.addShip(this.shipFactory, VehicleType.FRIGATE);
 			  System.out.println("Ship Created: Frigate");
 			  break;
 		  default:
@@ -293,19 +304,19 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  user.addPlaneAddable(factory, AddableType.ROCKET, index);
+			  user.addPlaneAddable(this.planeFactory, AddableType.ROCKET, index);
 			  System.out.println("Part Added : Rocket");
 			  break;
 		  case "2":
-			  user.addPlaneAddable(factory, AddableType.MISSILE, index);
+			  user.addPlaneAddable(this.planeFactory, AddableType.MISSILE, index);
 			  System.out.println("Part Added : Missile");
 			  break;
 		  case "3":
-			  user.addPlaneAddable(factory, AddableType.MACHINEGUN, index);
+			  user.addPlaneAddable(this.planeFactory, AddableType.MACHINEGUN, index);
 			  System.out.println("Part Added : Machine Gun");
 			  break;
 		  case "4":
-			  user.addPlaneAddable(factory, AddableType.BOMB, index);
+			  user.addPlaneAddable(this.planeFactory, AddableType.BOMB, index);
 			  System.out.println("Part Added : Bomb");
 			  break;
 		  default:
@@ -327,15 +338,15 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  user.addShipAddable(factory, AddableType.ROCKET, index);
+			  user.addShipAddable(this.shipFactory, AddableType.ROCKET, index);
 			  System.out.println("Part Added : Rocket");
 			  break;
 		  case "2":
-			  user.addShipAddable(factory, AddableType.TORPEDO, index);
+			  user.addShipAddable(this.shipFactory, AddableType.TORPEDO, index);
 			  System.out.println("Part Added : Torpedo");
 			  break;
 		  case "3":
-			  user.addShipAddable(factory, AddableType.CANNON, index);
+			  user.addShipAddable(this.shipFactory, AddableType.CANNON, index);
 			  System.out.println("Part Added : Cannon");
 			  break;
 		  default:
