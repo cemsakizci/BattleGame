@@ -75,6 +75,8 @@ public class BattleGame {
 		
 		if(user1Points<user2Points) {
 			System.out.println("Player 2 Win!");
+		} else if (user1Points == user2Points){
+			System.out.println("Draw!");
 		} else {
 			System.out.println("Player 1 Win!");
 		}
