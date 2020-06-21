@@ -2,7 +2,7 @@ package business;
 
 import java.util.ArrayList;
 
-public class Rocket implements IPlane, IShip{
+public class Rocket implements IAddable{
 	private int minPoint;
 	private int maxPoint;
 	private IVehicle vehicle;
