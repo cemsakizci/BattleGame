@@ -25,8 +25,8 @@ public class BattleGame {
 	Scanner in = new Scanner(System.in);
 	
 	public BattleGame() {
-		this.user1 = new User();
-		this.user2 = new User();
+		this.user1 = new User(1);
+		this.user2 = new User(2);
 		this.shipFactory = new ShipFactory();
 		this.planeFactory = new PlaneFactory();
 	}
@@ -123,19 +123,54 @@ public class BattleGame {
 		System.out.println(" //// PLAYERS ITEMS\\\\ ");
 		
 		System.out.println("Player 1:");
-		ArrayList<IPlane> player1Items = this.user1.getPlaneList();
+		ArrayList<IVehicle> player1Items = this.user1.getItems();
 		for(IVehicle vehicle:player1Items){
-			System.out.print(vehicle.getType() + " with " + vehicle.getEngineType() + " ");
+			if(vehicle.getEngineType() == null) {
+				System.out.print(vehicle.getType() + " [" + vehicle.getType().getValue()[0] +  " - " + vehicle.getType().getValue()[1] +"] ");
+			}
+			else {
+				System.out.print(vehicle.getType() + " [" + vehicle.getType().getValue()[0] +  " - " + vehicle.getType().getValue()[1] + "] with " + vehicle.getEngineType() + " ["+ vehicle.getEngineType().getValue()[0] + " - " + vehicle.getEngineType().getValue()[1] + "] ");
+			}
+			
 			ArrayList<AddableType> parts = vehicle.getParts();
-			System.out.println(parts);
+			System.out.print("(");
+			int i=0;
+			for(i=0; i < parts.size(); i++) {
+				if(i == parts.size()-1) {
+					System.out.print(parts.get(i) + " [" + parts.get(i).getValue()[0] + " - " + parts.get(i).getValue()[1] + "]");
+				}
+				else {
+					System.out.print(parts.get(i) + " [" + parts.get(i).getValue()[0] + " - " + parts.get(i).getValue()[1] + "], ");
+				}
+				
+			}
+			System.out.println(")");
+			
 		}
 		
 		System.out.println("\nPlayer 2:");
 		ArrayList<IVehicle> player2Items = this.user2.getItems();
 		for(IVehicle vehicle:player2Items){
-			System.out.print(vehicle.getType() + " ");
+			if(vehicle.getEngineType() == null) {
+				System.out.print(vehicle.getType() + " [" + vehicle.getType().getValue()[0] +  " - " + vehicle.getType().getValue()[1] +"] ");
+			}
+			else {
+				System.out.print(vehicle.getType() + " [" + vehicle.getType().getValue()[0] +  " - " + vehicle.getType().getValue()[1] + "] with " + vehicle.getEngineType() + " ["+ vehicle.getEngineType().getValue()[0] + " - " + vehicle.getEngineType().getValue()[1] + "] ");
+			}
+			
 			ArrayList<AddableType> parts = vehicle.getParts();
-			System.out.println(parts);
+			System.out.print("(");
+			int i=0;
+			for(i=0; i < parts.size(); i++) {
+				if(i == parts.size()-1) {
+					System.out.print(parts.get(i) + " [" + parts.get(i).getValue()[0] + " - " + parts.get(i).getValue()[1] + "]");
+				}
+				else {
+					System.out.print(parts.get(i) + " [" + parts.get(i).getValue()[0] + " - " + parts.get(i).getValue()[1] + "], ");
+				}
+				
+			}
+			System.out.println(")");
 		}
 		
 		System.out.println();
@@ -176,11 +211,11 @@ public class BattleGame {
 		
 		switch(choice) {
 		  case "1":
-			  System.out.println(user + " create plane");
+			  System.out.println("Player" + user.getUserID() + " created plane");
 			  printPlanes(user);
 			  break;
 		  case "2":
-			  System.out.println(user + " create ship");
+			  System.out.println("Player" + user.getUserID() + " created ship");
 			  printShips(user);
 			  break;
 		  default:
@@ -231,7 +266,7 @@ public class BattleGame {
 		  case "1":
 			  result = user.addPlane(this.planeFactory, vehicleType, EngineType.PULSEJET);
 			  if(result){
-				  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Pulsejet");
+				  System.out.println("Player" + user.getUserID() + " : Created Plane: "+ String.valueOf(vehicleType)+ " ,Engine: Pulsejet");
 			  }else{
 				  System.out.println("You exceed item limit. Operation failed.");
 			  }
@@ -239,7 +274,7 @@ public class BattleGame {
 		  case "2":
 			  result = user.addPlane(this.planeFactory, vehicleType, EngineType.TURBOJET);
 			  if(result){
-				  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Turbojet");
+				  System.out.println("Player" + user.getUserID() + " : Created Plane: "+ String.valueOf(vehicleType)+ " ,Engine: Turbojet");
 			  }else{
 				  System.out.println("You exceed item limit. Operation failed.");
 			  }

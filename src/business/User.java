@@ -9,11 +9,21 @@ public class User {
 	private int sameVehicleLimit = 3; // only 3 ships or planes allowed
 	private int sameTypeLimit = 2; // only 2 same specific type (ex: fighter planes )allowed
 	private Random rand;
+	private int userID;
 	
-	public User(){
+	public User(int userID){
 		planeList = new ArrayList<IPlane>();
 		shipList = new ArrayList<IShip>();
 		rand = new Random();
+		setUserID(userID);
+	}
+	
+	public int getUserID() {
+		return this.userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
 	public boolean addShip(AbstractFactory<IShip> factory, VehicleType vehicleType){

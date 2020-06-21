@@ -7,5 +7,10 @@ public enum VehicleType {
 	MULTIROLE,
 	CRUISER,
 	DESTROYER,
-	FRIGATE
+	FRIGATE;
+	
+	private int[][] minMaxArray = {{10,12}, {15,20}, {10,25}, {15,30}, {20,40}, {10,40}};
+    public int[] getValue() {
+        return minMaxArray[ordinal()];
+    }
 }
