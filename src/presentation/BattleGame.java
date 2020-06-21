@@ -18,8 +18,8 @@ import business.VehicleType;
 public class BattleGame {
 	private User user1;
 	private User user2;
-	private AbstractFactory<IShip> shipFactory;
-	private AbstractFactory<IPlane> planeFactory;
+	private AbstractFactory shipFactory;
+	private AbstractFactory planeFactory;
 	
 	Scanner in = new Scanner(System.in);
 	
@@ -68,7 +68,7 @@ public class BattleGame {
 	
 	private void runSimulation() {
 		int user1Points = user1.calculateTotalPoints();
-		int user2Points = user1.calculateTotalPoints();
+		int user2Points = user2.calculateTotalPoints();
 
 		System.out.println("Player 1 Score :"+String.valueOf(user1Points));
 		System.out.println("Player 2 Score :"+String.valueOf(user2Points));
