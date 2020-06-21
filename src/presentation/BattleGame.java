@@ -253,19 +253,34 @@ public class BattleGame {
 		
 		//Get input
 		String choice = in.nextLine();
-		
+		boolean result;
 		switch(choice) {
 		  case "1":
-			  user.addShip(this.shipFactory, VehicleType.CRUISER);
-			  System.out.println("Ship Created: Cruiser");
+			  result = user.addShip(this.shipFactory, VehicleType.CRUISER);
+			  if(result){
+				  System.out.println("Ship Created: Cruiser");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "2":
-			  user.addShip(this.shipFactory, VehicleType.DESTROYER);
-			  System.out.println("Ship Created: Destroyer");
+			  result = user.addShip(this.shipFactory, VehicleType.DESTROYER);
+			  if(result){
+				  System.out.println("Ship Created: Destroyer");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "3":
-			  user.addShip(this.shipFactory, VehicleType.FRIGATE);
-			  System.out.println("Ship Created: Frigate");
+			  result = user.addShip(this.shipFactory, VehicleType.FRIGATE);
+			  if(result){
+				  System.out.println("Ship Created: Frigate");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2 or 3.");
@@ -275,26 +290,35 @@ public class BattleGame {
 	
 
 	private void addAPart(User user) {
+
 		if (user.getItems().size() == 0) {
 			System.out.println("No Plane/Ship to add a part.");
 			return;
 		}
 		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 		System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
+
 		List<IVehicle> vehicles = new  ArrayList<IVehicle>();
+		int menuIndex = 0;
+		
 		for(IVehicle vehicle:user.getPlaneList()) {
+			System.out.println(String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle));
 			vehicles.add(vehicle);
+			menuIndex++;
 		}
 		
 		for(IVehicle vehicle:user.getShipList()) {
+			System.out.println(String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle));
 			vehicles.add(vehicle);
+			menuIndex++;
 		}
-		
-		for(int i=0;i<vehicles.size();i++) {
-			IVehicle oneVehicle = vehicles.get(i);
-			System.out.println(String.valueOf(i)+". "+oneVehicle.getType().toString() +" "+ getAddablePartsString(oneVehicle));
+		if(menuIndex == 0){
+			System.out.println("This user hasn't any vehicle. Operation failed.");
+			return;
+		}else{
+			System.out.println(" //// PLAYER OPERATIONS \\\\ ");
+			System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
 		}
-		
 		String choice = in.nextLine();
 		
 		//Check if specific vehicle index found
@@ -303,6 +327,7 @@ public class BattleGame {
 			selectedVehicle = vehicles.get(Integer.valueOf(choice));
 		}catch(Exception e) {
 			System.out.println("Wrong input!");
+			return;
 		}
 
 		//PLANE OR SHIP CHECK
@@ -316,9 +341,9 @@ public class BattleGame {
 	}
 	
 	private String getAddablePartsString(IVehicle vehicle) {
-		String result = "(";
+		String result = "( ";
 		for(AddableType addable: vehicle.getParts()) {
-			result += addable.toString();
+			result += addable.toString() + " ";
 		}
 		result += ")";
 		return result;
@@ -334,23 +359,42 @@ public class BattleGame {
 		
 		//Get input
 		String choice = in.nextLine();
-		
+		boolean result;
 		switch(choice) {
 		  case "1":
-			  user.addPlaneAddable(this.planeFactory, AddableType.ROCKET, index);
-			  System.out.println("Part Added : Rocket");
+			  result = user.addPlaneAddable(this.planeFactory, AddableType.ROCKET, index);
+			  if(result){
+				  System.out.println("Part Added : Rocket");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
 			  break;
 		  case "2":
-			  user.addPlaneAddable(this.planeFactory, AddableType.MISSILE, index);
-			  System.out.println("Part Added : Missile");
+			  result = user.addPlaneAddable(this.planeFactory, AddableType.MISSILE, index);
+			  if(result){
+				  System.out.println("Part Added : Missile");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "3":
-			  user.addPlaneAddable(this.planeFactory, AddableType.MACHINEGUN, index);
-			  System.out.println("Part Added : Machine Gun");
+			  result = user.addPlaneAddable(this.planeFactory, AddableType.MACHINEGUN, index);
+			  if(result){
+				  System.out.println("Part Added : Machine Gun");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "4":
-			  user.addPlaneAddable(this.planeFactory, AddableType.BOMB, index);
-			  System.out.println("Part Added : Bomb");
+			  result = user.addPlaneAddable(this.planeFactory, AddableType.BOMB, index);
+			  if(result){
+				  System.out.println("Part Added : Bomb");  
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2,3 or 4.");
@@ -368,19 +412,34 @@ public class BattleGame {
 		
 		//Get input
 		String choice = in.nextLine();
-		
+		boolean result;
 		switch(choice) {
 		  case "1":
-			  user.addShipAddable(this.shipFactory, AddableType.ROCKET, index);
-			  System.out.println("Part Added : Rocket");
+			  result = user.addShipAddable(this.shipFactory, AddableType.ROCKET, index);
+			  if(result){
+				  System.out.println("Part Added : Rocket");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "2":
-			  user.addShipAddable(this.shipFactory, AddableType.TORPEDO, index);
-			  System.out.println("Part Added : Torpedo");
+			  result = user.addShipAddable(this.shipFactory, AddableType.TORPEDO, index);
+			  if(result){
+				  System.out.println("Part Added : Torpedo");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  case "3":
-			  user.addShipAddable(this.shipFactory, AddableType.CANNON, index);
-			  System.out.println("Part Added : Cannon");
+			  result = user.addShipAddable(this.shipFactory, AddableType.CANNON, index);
+			  if(result){
+				  System.out.println("Part Added : Cannon");  
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
+			  
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1,2,3 or 4.");
