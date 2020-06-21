@@ -303,20 +303,19 @@ public class BattleGame {
 			System.out.println("No Plane/Ship to add a part.");
 			return;
 		}
-		System.out.println(" //// PLAYER OPERATIONS \\\\ ");
-		System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
 
 		List<IVehicle> vehicles = new  ArrayList<IVehicle>();
+		String menu = "";
 		int menuIndex = 0;
 		
 		for(IVehicle vehicle:user.getPlaneList()) {
-			System.out.println(String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle));
+			menu += String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle) + "\n";
 			vehicles.add(vehicle);
 			menuIndex++;
 		}
 		
 		for(IVehicle vehicle:user.getShipList()) {
-			System.out.println(String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle));
+			menu += String.valueOf(menuIndex)+". "+vehicle.getType().toString() +" "+ getAddablePartsString(vehicle) + "\n";
 			vehicles.add(vehicle);
 			menuIndex++;
 		}
@@ -326,6 +325,7 @@ public class BattleGame {
 		}else{
 			System.out.println(" //// PLAYER OPERATIONS \\\\ ");
 			System.out.println(" //// PLEASE SELECT VEHICLE TO ADD PART \\\\ ");
+			System.out.println(menu);
 		}
 		String choice = in.nextLine();
 		
