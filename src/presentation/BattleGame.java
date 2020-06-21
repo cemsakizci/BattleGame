@@ -226,15 +226,23 @@ public class BattleGame {
 		
 		//Get input
 		String choice = in.nextLine();
-		
+		boolean result;
 		switch(choice) {
 		  case "1":
-			  user1.addPlane(this.planeFactory, vehicleType, EngineType.PULSEJET);
-			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Pulsejet");
+			  result = user.addPlane(this.planeFactory, vehicleType, EngineType.PULSEJET);
+			  if(result){
+				  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Pulsejet");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
 			  break;
 		  case "2":
-			  user1.addPlane(this.planeFactory, vehicleType, EngineType.TURBOJET);
-			  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Turbojet");
+			  result = user.addPlane(this.planeFactory, vehicleType, EngineType.TURBOJET);
+			  if(result){
+				  System.out.println(user+ ": Create Plane: "+ String.valueOf(vehicleType)+ " Engine: Turbojet");
+			  }else{
+				  System.out.println("You exceed item limit. Operation failed.");
+			  }
 			  break;
 		  default:
 			  System.out.println("Wrong input! Please enter 1 or 2.");
