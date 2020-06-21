@@ -50,8 +50,12 @@ public class User {
 		return true;
 	}
 	
-	public boolean addShipAddable(AbstractFactory factory, AddableType type, int index){
-		IAddable updatedShip = factory.createAddable(shipList.get(index), type);
+	public boolean addShipAddable(AbstractFactory<IShip> factory, AddableType type, int index){
+		IShip ship = shipList.get(index);
+		if(ship.getParts().contains(type)){
+			return false;
+		}
+		IAddable updatedShip = factory.createAddable(ship, type);
 		if(updatedShip != null){
 			shipList.set(index, updatedShip);
 			return true;
@@ -59,8 +63,12 @@ public class User {
 		return false;
 	}
 	
-	public boolean addPlaneAddable(AbstractFactory factory, AddableType type, int index){
-		IAddable updatedPlane = factory.createAddable(planeList.get(index), type);
+	public boolean addPlaneAddable(AbstractFactory<IPlane> factory, AddableType type, int index){
+		IPlane plane = planeList.get(index);
+		if(plane.getParts().contains(type)){
+			return false;
+		}
+		IAddable updatedPlane = factory.createAddable(plane, type);
 		if(updatedPlane != null){
 			planeList.set(index, updatedPlane);
 			return true;
